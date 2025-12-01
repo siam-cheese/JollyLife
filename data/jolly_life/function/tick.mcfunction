@@ -25,15 +25,15 @@ execute as @a[nbt={active_effects:[{"id":"minecraft:mining_fatigue","amplifier":
 
 execute as @a[scores={HLives=0}] at @s run function jolly_life:returntodeath
 
+#Start lives
+execute as @a[scores={startRoll=0..},tag=rolling] run scoreboard players operation @s startRoll -= #1 numbers
+execute as @a[scores={startRoll=0..},tag=rolling] run scoreboard players operation @s reRoll = @s startRoll
+execute as @a[scores={startRoll=0..},tag=rolling] run scoreboard players operation @s reRoll %= spinRate numbers
 
-execute as @a[scores={startRoll=0..}] run scoreboard players operation @s startRoll -= #1 numbers
-execute as @a[scores={startRoll=0..}] run scoreboard players operation @s reRoll = @s startRoll
-execute as @a[scores={startRoll=0..}] run scoreboard players operation @s reRoll %= spinRate numbers
+execute as @a[scores={reRoll=0,startRoll=1..},tag=rolling] at @s run function jolly_life:show_lives
 
-execute as @a[scores={reRoll=0,startRoll=1..}] at @s run function jolly_life:show_lives
-
-execute as @a[scores={startRoll=0}] at @s run playsound block.end_portal.spawn master @s ~ ~ ~
-execute as @a[scores={startRoll=-1}] run scoreboard players set @s reRoll -1
+execute as @a[scores={startRoll=0},tag=rolling] at @s run playsound block.end_portal.spawn master @s ~ ~ ~
+execute as @a[scores={startRoll=-1},tag=rolling] run scoreboard players set @s reRoll -1
 
 execute as @a if score @s startRoll matches 250 run scoreboard players set spinRate numbers 3
 execute as @a if score @s startRoll matches 200 run scoreboard players set spinRate numbers 5
@@ -64,18 +64,26 @@ execute as @a[scores={secretSantaAnim=3}] store result score @s isHitMen run ran
 execute as @a[scores={secretSantaAnim=3,HLives=..1}] run scoreboard players set @s isHitMen 101
 
 execute as @a[scores={secretSantaAnim=3,HLives=2..}, limit=1] run function jolly_life:santas_elf_select
-execute as @a[scores={secretSantaAnim=3}] if score @s isHitMen <= #hitMenChance numbers at @s run function jolly_life:gift_targ_select
-execute as @a[scores={secretSantaAnim=3}] if score @s isHitMen <= #hitMenChance numbers at @s run function jolly_life:gift_targ_select
+execute as @a[scores={secretSantaAnim=3}] if score @s isHitMen <= #naughtyChance numbers at @s run function jolly_life:gift_targ_select
+execute as @a[scores={secretSantaAnim=3}] if score @s isHitMen <= #naughtyChance numbers at @s run function jolly_life:gift_targ_select
 execute if entity @a[scores={secretSantaAnim=3}] run tellraw @a {"text": "Your secret santas have been selected! Lets hope they have a nice gift for you :3","color": "green"}
-execute if entity @a[tag=LittleShit] run tellraw @a [{"text": "btw ","color": "dark_purple"},{"selector":"@a[tag=LittleShit,limit=1]"}, {"text": " is a piece of shit but their kinda weak so dw about them"}]
+execute if entity @a[tag=LittleShit] run tellraw @a [{"text": "btw ","color": "dark_purple"},{"selector":"@a[tag=LittleShit,limit=1]"}, {"text": " is a piece of shit tiny elf but their kinda weak so dw about them"}]
 
 #Little Shit
 effect give @a[tag=LittleShit] weakness 1 1 true
 effect give @a[tag=LittleShit] resistance 1 1 true
 
+execute as @a[tag=LittleShit,scores={HLives=1}] run function jolly_life:remove_little_shit
+
 
 
 scoreboard players reset @a deathTrigger
+
+#Life Colors
+execute as @a[scores={HLives=4..}] run team join darkGreenLife
+execute as @a[scores={HLives=3}] run team join greenLife
+execute as @a[scores={HLives=2}] run team join yellowLife
+execute as @a[scores={HLives=1}] run team join redLife
 
 
 
