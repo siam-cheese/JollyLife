@@ -87,6 +87,7 @@ execute as @a[scores={HLives=1}] run team join redLife
 execute as @a[scores={HLives=0}] at @s run function jolly_life:returntodeath
 execute if entity @a[scores={HLives=0}] run gamerule keepInventory false
 execute if entity @a[scores={HLives=0}] run gamerule showDeathMessages false
+execute at @a[scores={HLives=0}] run summon lightning_bolt
 kill @a[scores={HLives=0}]
 execute if entity @a[scores={HLives=-1}] run gamerule keepInventory true
 execute if entity @a[scores={HLives=-1}] run gamerule showDeathMessages true
