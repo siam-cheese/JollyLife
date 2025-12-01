@@ -36,13 +36,13 @@ execute as @a if score @s startRoll matches 100 run scoreboard players set spinR
 execute as @a if score @s startRoll matches 20 run scoreboard players set spinRate numbers 10
 
 
-#hitmen
+#secret santa
 
 execute as @a[tag=target,scores={deathTrigger=1..}] run tellraw @a[tag=hitMen] ["",{"text":"The target "},{"selector":"@s"},{"text":" has been eliminated, if, and only if, this was your target, and you played a role in this death, are you allowed to do /trigger claimAssasinKill and recieve your prize "}]
 execute as @a[tag=target,scores={deathTrigger=1..}] run tag @s remove target
 
 execute as @a[scores={secretSantaAnim=2..}] run scoreboard players operation @s secretSantaAnim -= #1 numbers
-title @a[scores={secretSantaAnim=122}] times 20 100 20
+title @a[scores={secretSantaAnim=122}] times 0 40 20
 title @a[scores={secretSantaAnim=120}] title {"text":"Your Secret Santa is.","color":"green"}
 title @a[scores={secretSantaAnim=80}] title {"text":"Your Secret Santa is..","color":"yellow"}
 title @a[scores={secretSantaAnim=40}] title {"text":"Your Secret Santa is...","color":"red"}
