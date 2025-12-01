@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#P#",
+        "PGP",
+        "#P#"
+    ],
+    "key": {
+        "#": "minecraft:sand",
+        "P": "minecraft:paper",
+        "G": "minecraft:gunpowder"
+    },
+    "result": {
+        "id": "minecraft:tnt",
+        "count": 1
+    }
+}

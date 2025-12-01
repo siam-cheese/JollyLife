@@ -1,0 +1,17 @@
+{
+    "display": {
+        "title": "charterAtHome",
+        "description": "wawaw",
+        "icon": {
+            "item": "minecraft:minecraft:end_crystal"
+        },
+        "show_toast": false,
+        "announce_to_chat": false
+    },
+    "parent": "global:charter_sm",
+    "criteria": {
+        "trigger": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}
