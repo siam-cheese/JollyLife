@@ -1,9 +1,6 @@
 execute as @a[tag=!hl] run scoreboard players set @s HLives 300
 execute as @a[tag=!hl] run tag @s add hl
 
-execute as @a[scores={HLives=-2}] at @s run function jolly_life:returntodeath
-execute as @a[scores={HLives=-2}] at @s run scoreboard players set @s HLives -5
-
 
 # trigger start
 scoreboard players enable @a lifeCount
@@ -22,8 +19,6 @@ scoreboard players set @a claimAssasinKill 0
 #trigger end
 
 execute as @a[nbt={active_effects:[{"id":"minecraft:mining_fatigue","amplifier":24b}]}] at @s run function jolly_life:gain_life
-
-execute as @a[scores={HLives=0}] at @s run function jolly_life:returntodeath
 
 #Start lives
 execute as @a[scores={startRoll=0..},tag=rolling] run scoreboard players operation @s startRoll -= #1 numbers
@@ -87,7 +82,17 @@ execute as @a[scores={HLives=1}] run team join redLife
 
 
 
+#Death shit
 
+execute as @a[scores={HLives=0}] at @s run function jolly_life:returntodeath
+execute if entity @a[scores={HLives=0}] run gamerule keepInventory false
+execute if entity @a[scores={HLives=0}] run gamerule showDeathMessages false
+kill @a[scores={HLives=0}]
+execute if entity @a[scores={HLives=-1}] run gamerule keepInventory true
+execute if entity @a[scores={HLives=-1}] run gamerule showDeathMessages true
+execute as @a[scores={HLives=-1}] at @s run function jolly_life:returntodeath
+execute as @a[scores={HLives=-1}] at @s run scoreboard players set @s HLives -2
+execute as @a[scores={HLives=-1}] at @s run scoreboard players set @s HLives -2
 
 
 

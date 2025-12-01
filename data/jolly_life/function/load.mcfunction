@@ -21,4 +21,6 @@ team add greenLife
 team modify greenLife color green
 team add darkGreenLife
 team modify darkGreenLife color dark_green
+team add spectators
+team modify spectators color dark_gray
 
