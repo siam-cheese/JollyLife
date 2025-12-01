@@ -5,7 +5,7 @@ execute as @a[tag=!hl] run tag @s add hl
 # trigger start
 scoreboard players enable @a lifeCount
 scoreboard players enable @a withDrawLife
-scoreboard players enable @a[tag=hitMen] claimAssasinKill
+#scoreboard players enable @a[tag=hitMen] claimAssasinKill
 
 execute as @a[scores={lifeCount=1..}] run function jolly_life:get_life_count
 execute as @a[scores={withDrawLife=1..,HLives=..1}] run tellraw @s {"text":"You cannot withdraw your final life.","color": "red"}
